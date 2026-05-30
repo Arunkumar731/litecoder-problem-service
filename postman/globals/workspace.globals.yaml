@@ -1,0 +1,5 @@
+name: Globals
+values:
+  - key: LiteCoder_server
+    value: ''
+    enabled: true
