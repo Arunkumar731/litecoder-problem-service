@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 
+// if any request comes and route start with /api , we map it to api_router
 app.use('/api', api_router)
 
 app.get('/ping', (req, res) => {
