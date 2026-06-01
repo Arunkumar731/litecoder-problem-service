@@ -7,6 +7,9 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const { PORT } = require("./config/server.config");
+const BaseError = require("./errors/base.error");
+const errorHandler = require("./utils/errorHandler");
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,8 +22,11 @@ app.get('/ping', (req, res) => {
     return res.json({message : "problem service has arrived"});
 });
 
+// last middleware if any errors come
+app.use(errorHandler)
 app.listen(PORT, () => {
     console.log(`server has started at port ${PORT}`);
+    
 });
 
 
