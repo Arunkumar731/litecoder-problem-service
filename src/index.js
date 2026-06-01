@@ -22,6 +22,7 @@ app.get('/ping', (req, res) => {
     return res.json({message : "problem service has arrived"});
 });
 
+// last middleware if any errors come
 app.use(errorHandler)
 app.listen(PORT, () => {
     console.log(`server has started at port ${PORT}`);
