@@ -1,4 +1,3 @@
 module.exports = {
-    problem : require('./problem.model')
-    
-};
+    Problem: require('./problem.model'),
+}

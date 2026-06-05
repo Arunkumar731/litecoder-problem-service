@@ -1,5 +1,3 @@
-const ProblemService = require('./problem.service');
-
 module.exports = {
-    ProblemService
-};
+    ProblemService: require('./problem.service')
+}

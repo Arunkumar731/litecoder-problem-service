@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 
-const v1_router = require("./v1"); 
+const v1Router = require('./v1');
 
-const api_router = express.Router();
+const apiRouter = express.Router();
 
-// if any request comes and route start with /v1 , we map it to v1_router
-api_router.use("/v1", v1_router);
+// If any request comes and route continues with /v1, we map it to v1Router
+apiRouter.use('/v1', v1Router);
 
-module.exports = api_router;
+module.exports = apiRouter;

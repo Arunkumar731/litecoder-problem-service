@@ -1,36 +1,22 @@
 const marked = require('marked');
-const sanitizeHtml = require('sanitize-html');
-const TurndownService = require('turndown');
+const sanitizeHtmlLibrary = require('sanitize-html');
+const TurndownService = require('turndown')
 
-function sanitizeMarkdown(markDownContent){
-
+function sanitizeMarkdownContent(markdownContent) {
     const turndownService = new TurndownService();
 
-    // convert markdown to html
-    const convertedHtml = marked.parse(markDownContent);
-    console.log(convertedHtml);
+    // 1. Convert markdown to html
+    const convertedHtml = marked.parse(markdownContent);
 
-    // sanitizeHtml 
-    const sanitizedHtml = sanitizeHtml(convertedHtml, {
-        allowedTags: sanitizeHtml.defaults.allowedTags
+    // 2. Sanitize html
+    const sanitizedHtml = sanitizeHtmlLibrary(convertedHtml, {
+        allowedTags: sanitizeHtmlLibrary.defaults.allowedTags.concat(['img'])
     });
-    console.log(sanitizedHtml);
 
-    // return sanitizedHtml;
+    // 3. Convert the sanitized html back to markdown
     const sanitizedMarkdown = turndownService.turndown(sanitizedHtml);
-    console.log(sanitizedMarkdown);
-
+    
     return sanitizedMarkdown;
 }
 
-const input = `
-# Hello world 
-### this is a markDown
-- something 
-<script>alert("wahoo")</script>
-[Link](www.google.com)
-`;
-
-sanitizeMarkdown(input);
-
-module.exports = sanitizeMarkdown;
+module.exports = sanitizeMarkdownContent;

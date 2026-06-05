@@ -1,36 +1,35 @@
-const sanitizeMarkdownContent = require('../utils/markdownSanitizer');
+const sanitizeMarkdownContent = require("../utils/markdownSanitizer");
 
 class ProblemService {
+
     constructor(problemRepository) {
         this.problemRepository = problemRepository;
     }
 
-    async addProblem(req, res, next) {
-        try {
+    async createProblem(problemData) {
+        // 1. Sanitize the markdown for description
+        problemData.description = sanitizeMarkdownContent(problemData.description);
 
-            // check whether request reached controller
-            console.log("Controller reached");
+        const problem = await this.problemRepository.createProblem(problemData);
 
-            // print request body
-            console.log("Request Body:", req.body);
-
-            const newProblem = await this.problemRepository.createProblem(req.body);
-
-            return res.status(StatusCodes.CREATED).json({
-                success: true,
-                message: 'successfully created a new problem',
-                error: {},
-                data: newProblem
-            });
-
-        } catch (error) {
-
-            // print exact error
-            console.log("Controller Error:", error);
-
-            next(error);
-        }
+        return problem;
     }
+
+    async getAllProblems() {
+        const problems = await this.problemRepository.getAllProblems();
+        return problems;
+    }
+
+    async getProblem(problemId) {
+        const problem = await this.problemRepository.getProblem(problemId);
+        return problem;
+    }
+
+    async deleteProblem(problemId) {
+        const problem = await this.problemRepository.deleteProblem(problemId);
+        return problem;
+    }
+
 }
 
 module.exports = ProblemService;

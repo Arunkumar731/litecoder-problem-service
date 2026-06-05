@@ -1,54 +1,38 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const ProblemSchema = new mongoose.Schema({
-    title : {
-        type : String,
-        required : [true, "Title can not be empty"]
-
-    },
-    description : {
-        type : String,
-        required: [true, 'Description Should be provided'] 
-    },
-    difficulty :{
+const problemSchema = new mongoose.Schema({
+    title: {
         type: String,
-        enum : ['easy', 'medium', 'hard'],
-        required : [true, 'providing Difficulty level is mandatory'],
-        default : 'easy'
+        required: [true, 'Title cannot be empty']
     },
-    tags : {
-        type : Array,
-        required : [true, 'give a proper tag to the question']
+    description: {
+        type: String,
+        required: [true, 'Description cannot be empty']
     },
-    testCases:[
+    difficulty: {
+        type: String,
+        enum: ['easy', 'medium', 'hard'],
+        required: [true, 'Difficulty cannot be empty'],
+        default: 'easy'
+    },
+    testCases: [
         {
-            input :{
-                type : String,
-                required : true
+            input: {
+                type: String,
+                required: true
             },
-            output :{
-                type : String
+            output: {
+                type: String,
+                required: true
             }
         }
     ],
-    editorial : {
+    editorial: {
         type: String
-    },
-    constrains : {
-        type: String,
-        required: true
-    },
-    hints:{
-        type : String
     }
-
 });
 
-const problem = mongoose.model('problem',ProblemSchema);
+const Problem = mongoose.model('Problem', problemSchema);
 
-module.exports = problem;
-
-
-
-
+module.exports = Problem;
 

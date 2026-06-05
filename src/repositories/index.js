@@ -1,5 +1,3 @@
-const ProblemRepository = require('./problem.repository');
-
 module.exports = {
-    ProblemRepository
-};
+    ProblemRepository: require('./problem.repository')
+}
