@@ -39,7 +39,7 @@ const ProblemSchema = new mongoose.Schema({
         required: true
     },
     hints:{
-        type :string
+        type : String
     }
 
 });
