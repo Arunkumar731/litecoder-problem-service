@@ -1,36 +1,32 @@
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const api_router = require("./routes/index")
+const { PORT } = require('./config/server.config');
+const apiRouter = require('./routes');
+const errorHandler = require('./utils/errorHandler');
+const connectToDB = require('./config/db.config');
+
 
 const app = express();
-
-const bodyParser = require("body-parser");
-
-const { PORT } = require("./config/server.config");
-const BaseError = require("./errors/base.error");
-const errorHandler = require("./utils/errorHandler");
-const { connect } = require("mongoose");
-const connectToDb = require("./config/db.config");
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 
-// if any request comes and route start with /api , we map it to api_router
-app.use('/api', api_router)
+
+// If any request comes and route starts with /api, we map it to apiRouter
+app.use('/api', apiRouter);
+
 
 app.get('/ping', (req, res) => {
-    return res.json({message : "problem service has arrived"});
+    return res.json({message: 'Problem Service is alive'});
 });
 
-// last middleware if any errors come
-app.use(errorHandler)
+// last middleware if any error comes
+app.use(errorHandler);
 
 app.listen(PORT, async () => {
-    console.log(`server has started at port ${PORT}`);
-    await connectToDb();
-    console.log("Successfully connected to DB");
+    console.log(`Server started at PORT: ${PORT}`);
+    await connectToDB();
+    console.log("Successfully connected to db");
 });
-
-

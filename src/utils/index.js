@@ -1,3 +1,3 @@
 module.exports = {
-    markdown : require('./markDownSanitizer')
-};
+    markdownSanitizer: require('./markdownSanitizer')
+}

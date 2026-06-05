@@ -1,14 +1,10 @@
-const express = require("express");
+const express = require('express');
 
-const problemRouter = require("./problems.routes"); 
+const problemRouter = require('./problems.routes');
 
-const v1_router = express.Router();
+const v1Router = express.Router();
 
-// if any request comes and route continue with /problems , we map it to problemRouter
-v1_router.use("/problems", problemRouter);
+// If any request comes and route continues with /problems, we map it to problemRouter
+v1Router.use('/problems', problemRouter);
 
-module.exports = v1_router;
-
-
-
-
+module.exports = v1Router;
